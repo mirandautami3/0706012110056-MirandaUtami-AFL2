@@ -10,20 +10,23 @@ import Foundation
 var index = 0
 var input: String? = nil
 var username: String?
-var health = 100
+var health = 85
 var energi = 50
 var potion = 20
 var trollHealth = 1000
 var golemHealth = 1000
-let alphabetSet = CharacterSet.letters
+var troll = 1
+var golem = 1
+
+// Creating an empty array //
+var enemyName: [String] = ["Troll","Golem"]
+let actions = ["Physical Attack", "Meteor", "Shield", "Use Potion", "Scan Enemy", "Flee"]
 
 
 //panggil function
 tampilanAwal()
 welcome()
 journey()
-
-
 
 
 func tampilanAwal() {
@@ -45,12 +48,13 @@ func tampilanAwal() {
     }
 }
 
+
 func welcome(){
     while index == 0 {
         print ("May I know your name, a young wizard?")
         
         if let input = readLine() {
-            if input.rangeOfCharacter(from: CharacterSet.letters.inverted) == nil {
+            if input.rangeOfCharacter(from: CharacterSet.letters.inverted) == nil && input != "" {
                 username = input
                 break
             }
@@ -64,6 +68,7 @@ func welcome(){
         print ("mohon maaf input salah")
     }
 }
+
 
 func journey(){
     while index == 0 {
@@ -83,19 +88,23 @@ func journey(){
                """)
         input = readLine()?.uppercased()
         
-        if input == "C" {
-            playerStats()
-        } else if input == "H" {
-            healWound()
-        } else if input == "F" {
-             forestOfTroll()
-        } else if input == "M" {
-             mountainOfGolem()
-        } else if input == "Q" {
-             exit(1)
+        switch input {
+            case "C":
+                playerStats()
+            case "H":
+                healWound()
+            case "F":
+                forestOfTroll()
+            case "M":
+                mountainOfGolem()
+            case "Q":
+                exit(1)
+            default:
+                print("inputan salah !")
         }
     }
 }
+
 
 func playerStats(){
     while index == 0 {
@@ -105,8 +114,7 @@ func playerStats(){
         }else{
             print ("mohon maaf input salah")
         }
-       // print ("Player name \(username)")
-    
+       
         print ("""
                HP = 100/\(health)
                MP = 50/\(energi)
@@ -132,6 +140,7 @@ func playerStats(){
     }
 }
 
+
 func healWound(){
     while index == 0 {
         print ("""
@@ -144,20 +153,31 @@ func healWound(){
            """)
         
         input = readLine()?.uppercased()
+        
         if input == "Y" {
             if potion > 0{
-                print("""
-                      Anda sudah mengobati, nyawa anda jadi: \(health)
-                      Potion anda tersisa \(potion) Potion
-                      """)
-            }else{
+                if health == 100{
+                    print("Health is Full")
+                } else if health < 100 {
+                    health += 20
+                    potion -= 1
+                   // print("""
+                     //     Anda sudah mengobati, nyawa anda jadi: \(health)
+                       //   Potion anda tersisa \(potion) Potion
+                       //   """)
+                    
+                    if health > 100 {
+                        health = 100
+                    }
+                }
+            } else {
                 while index == 0 {
                     print("""
                           You don't have any potion left. Be careful of your next journey.
-                          
+
                           press [return] to go back:
                           """)
-                    
+
                     input = readLine()
                     if input == "" {
                         break
@@ -166,8 +186,7 @@ func healWound(){
                     }
                 }
             }
-        
-        }else if input == "N" {
+        } else if input == "N" {
             break
         } else {
             print("Inputan salah")
@@ -175,14 +194,81 @@ func healWound(){
     }
 }
 
+// dari sini 1
+
+// Membuat array aksi player
+var playerActions = [
+    "Physical Attack. No mana required. Deal 5pt of damage.",
+    "L21 Meteor. Use 15pt of MP. Deal 50pt of damage.",
+    "L3J Shield. Use 10pt of MP. Block enemy's attack in 1 turn.",
+    "Use Potion to heal wound.",
+    "Scan enemy's vital.",
+    "Flee from battle."
+]
+
 func forestOfTroll(){
     while index == 0 {
         print("""
               As you enter the forest, you fell a sense of unease wash over you.
               Suddenly, you hear the sound of twigs snapping behind you. you quickly spin around, and find a troll emerging from the shadows.
               
-              😈 Nama   : Troll x1
+              😈 Nama   : \(enemyName[0]) x\(troll)
               😈 Health : \(trollHealth)
+              
+              Choose your action :
+              [1] physical Attack. No mana required. Deal 5pt of damage.
+              [2] Meteor. Use 15pt of MP. Deal 50pt of damage.
+              [3] Shield. Use 10pt of MP. Block enemy's attack in 1 turn.
+              
+              [4] Use potion to heal wound.
+              [5] Scan enemy's vital.
+              [6] Flee from battle.
+              
+              Your Choice?
+              """)
+        
+        input = readLine()
+        
+//        switch input {
+//                case 1:
+//                    trollHealth -= 5
+//                    print("You dealt 5pt of damage to \(troll))
+//                case 2:
+//                    if let username = username, username >= 15 {
+//                        username -= 15
+//                        trollHealth -= 50
+//                        print("You used L21 Meteor and dealt 50pt of damage to \(troll["name"]!).")
+//                    } else {
+//                        print("You don't have enough MP to use L21 Meteor.")
+//                    }
+//                default:
+//                print("inputan salah !")
+//
+        if input == "1" {
+
+        }else if input == "2"{
+
+        }else if input == "3"{
+
+        }else if input == "4"{
+
+        }else if input == "5"{
+
+        }else if input == "6"{
+            keluarPertandingan()
+            break
+        }
+    }
+}
+
+
+func mountainOfGolem(){
+    while index == 0 {
+        print("""
+              As you make your way through the rugged montain terrain, you can fell the chill of the wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your freeze in your tracks. that's when you see it - a massive ,snarling Golem emerging from the shadows.
+              
+              😈 Nama   : \(enemyName[0]) x\(golem)
+              😈 Health : \(golemHealth)
               
               Choose your action :
               [1] physical Attack. No mana required. Deal 5pt of damage.
@@ -233,45 +319,3 @@ func keluarPertandingan(){
         }
     }
 }
-
-func mountainOfGolem(){
-    while index == 0 {
-        print("""
-              As you make your way through the rugged montain terrain, you can fell the chill of the wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your freeze in your tracks. that's when you see it - a massive ,snarling Golem emerging from the shadows.
-              
-              😈 Nama   : Golem x1
-              😈 Health : \(golemHealth)
-              
-              Choose your action :
-              [1] physical Attack. No mana required. Deal 5pt of damage.
-              [2] Meteor. Use 15pt of MP. Deal 50pt of damage.
-              [3] Shield. Use 10pt of MP. Block enemy's attack in 1 turn.
-              
-              [4] Use potion to heal wound.
-              [5] Scan enemy's vital.
-              [6] Flee from battle.
-              
-              Your Choice?
-              """)
-        
-        input = readLine()
-        if input == "1" {
-            
-        }else if input == "2"{
-           
-        }else if input == "3"{
-            
-        }else if input == "4"{
-            
-        }else if input == "5"{
-            
-        }else if input == "6"{
-            keluarPertandingan()
-            break
-        }
-    }
-}
-
-
-
-    
