@@ -10,7 +10,7 @@ import Foundation
 var index = 0
 var input: String? = nil
 var username: String?
-var health = 85
+var health = 100
 var energi = 50
 var potion = 20
 var trollHealth = 1000
@@ -135,7 +135,7 @@ func playerStats(){
         if input == "" {
             break
         }else if input != ""{
-            print ("mohon maaf input salah")
+            print ("mohon maaf input salah !!")
         }
     }
 }
@@ -194,17 +194,6 @@ func healWound(){
     }
 }
 
-// dari sini 1
-
-// Membuat array aksi player
-var playerActions = [
-    "Physical Attack. No mana required. Deal 5pt of damage.",
-    "L21 Meteor. Use 15pt of MP. Deal 50pt of damage.",
-    "L3J Shield. Use 10pt of MP. Block enemy's attack in 1 turn.",
-    "Use Potion to heal wound.",
-    "Scan enemy's vital.",
-    "Flee from battle."
-]
 
 func forestOfTroll(){
     while index == 0 {
@@ -229,34 +218,73 @@ func forestOfTroll(){
         
         input = readLine()
         
-//        switch input {
-//                case 1:
-//                    trollHealth -= 5
-//                    print("You dealt 5pt of damage to \(troll))
-//                case 2:
-//                    if let username = username, username >= 15 {
-//                        username -= 15
-//                        trollHealth -= 50
-//                        print("You used L21 Meteor and dealt 50pt of damage to \(troll["name"]!).")
-//                    } else {
-//                        print("You don't have enough MP to use L21 Meteor.")
-//                    }
-//                default:
-//                print("inputan salah !")
-//
         if input == "1" {
-
+            if health > 0 && trollHealth > 0 {
+                trollHealth -= 5
+                health -= 5
+                
+                if health < 0 {
+                    health = 0
+                    print("You lose")
+                    exit(1)
+                }
+                if trollHealth < 0 {
+                    trollHealth = 0
+                    print("You win")
+                    break
+                }
+            }
         }else if input == "2"{
-
+            if energi > 15{
+                if health > 0 && trollHealth > 0 {
+                    trollHealth -= 50
+                    health -= 5
+                    energi -= 15
+                    
+                    if health < 0 {
+                        health = 0
+                        print("You lose")
+                        exit(1)
+                    }
+                    if trollHealth < 0 {
+                        trollHealth = 0
+                        print("You win")
+                        break
+                    }
+                }
+            } else {
+                print("Your mana is \(energi), you can't use this attack")
+            }
         }else if input == "3"{
-
+            if energi > 10 {
+                energi -= 10
+                print("You use shield, your health is \(health)")
+            } else {
+                print("Your mana is \(energi), you can't use shield")
+            }
         }else if input == "4"{
-
+            healWound()
         }else if input == "5"{
-
+            if health > 0 && trollHealth > 0 {
+                trollHealth -= 20
+                health -= 5
+                print("You attack monster vital with 20 damage")
+                if health < 0 {
+                    health = 0
+                    print("You lose")
+                    exit(1)
+                }
+                if trollHealth < 0 {
+                    trollHealth = 0
+                    print("You win")
+                    break
+                }
+            }
         }else if input == "6"{
             keluarPertandingan()
             break
+        }else{
+            print("Input not valid !!")
         }
     }
 }
@@ -284,18 +312,77 @@ func mountainOfGolem(){
         
         input = readLine()
         if input == "1" {
+            if health > 0 && golemHealth > 0 {
+                golemHealth -= 5
+                health -= 5
+                
+                if health < 0 {
+                    health = 0
+                    print("You lose")
+                    exit(1)
+                }
+                if golemHealth < 0 {
+                    golemHealth = 0
+                    print("You win")
+                    break
+                }
+            }
             
         }else if input == "2"{
-           
+            if energi > 15{
+                if health > 0 && golemHealth > 0 {
+                    golemHealth -= 50
+                    health -= 5
+                    energi -= 15
+                    
+                    if health < 0 {
+                        health = 0
+                        print("You lose")
+                        exit(1)
+                    }
+                    if golemHealth < 0 {
+                       golemHealth = 0
+                        print("You win")
+                        break
+                    }
+                }
+            } else {
+                print("Your mana is \(energi), you can't use this attack")
+            }
+            
         }else if input == "3"{
+            if energi > 10 {
+                energi -= 10
+                print("You use shield, your health is \(health)")
+            } else {
+                print("Your mana is \(energi), you can't use shield")
+            }
             
         }else if input == "4"{
+            healWound()
             
         }else if input == "5"{
+            if health > 0 && golemHealth > 0 {
+                golemHealth -= 20
+                health -= 5
+                print("You attack monster vital with 20 damage")
+                if health < 0 {
+                    health = 0
+                    print("You lose")
+                    exit(1)
+                }
+                if golemHealth < 0 {
+                    golemHealth = 0
+                    print("You win")
+                    break
+                }
+            }
             
         }else if input == "6"{
             keluarPertandingan()
             break
+        }else{
+            print("Mohon maaf Input salah !!")
         }
     }
 }
