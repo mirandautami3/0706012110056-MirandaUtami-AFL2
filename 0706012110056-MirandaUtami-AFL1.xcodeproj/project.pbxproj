@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9F976B5229AD9E83001F2C7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F976B5129AD9E83001F2C7F /* main.swift */; };
+		9F9BFC6029D5B4B300DB33F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC5F29D5B4B300DB33F3 /* User.swift */; };
+		9F9BFC6229D5B4C500DB33F3 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6129D5B4C500DB33F3 /* Enemy.swift */; };
+		9F9BFC6429D85FB100DB33F3 /* Golem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6329D85FB100DB33F3 /* Golem.swift */; };
+		9F9BFC6629D85FC000DB33F3 /* Troll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6529D85FC000DB33F3 /* Troll.swift */; };
+		9F9BFC6829D865B400DB33F3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6729D865B400DB33F3 /* Item.swift */; };
+		9F9BFC6A29D8667E00DB33F3 /* HealthPotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6929D8667E00DB33F3 /* HealthPotion.swift */; };
+		9F9BFC6C29D8668900DB33F3 /* ManaPotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9BFC6B29D8668900DB33F3 /* ManaPotion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,13 @@
 /* Begin PBXFileReference section */
 		9F976B4E29AD9E83001F2C7F /* 0706012110056-MirandaUtami-AFL1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "0706012110056-MirandaUtami-AFL1"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F976B5129AD9E83001F2C7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		9F9BFC5F29D5B4B300DB33F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9F9BFC6129D5B4C500DB33F3 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		9F9BFC6329D85FB100DB33F3 /* Golem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Golem.swift; sourceTree = "<group>"; };
+		9F9BFC6529D85FC000DB33F3 /* Troll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Troll.swift; sourceTree = "<group>"; };
+		9F9BFC6729D865B400DB33F3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		9F9BFC6929D8667E00DB33F3 /* HealthPotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPotion.swift; sourceTree = "<group>"; };
+		9F9BFC6B29D8668900DB33F3 /* ManaPotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManaPotion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,13 @@
 			isa = PBXGroup;
 			children = (
 				9F976B5129AD9E83001F2C7F /* main.swift */,
+				9F9BFC5F29D5B4B300DB33F3 /* User.swift */,
+				9F9BFC6129D5B4C500DB33F3 /* Enemy.swift */,
+				9F9BFC6329D85FB100DB33F3 /* Golem.swift */,
+				9F9BFC6529D85FC000DB33F3 /* Troll.swift */,
+				9F9BFC6729D865B400DB33F3 /* Item.swift */,
+				9F9BFC6929D8667E00DB33F3 /* HealthPotion.swift */,
+				9F9BFC6B29D8668900DB33F3 /* ManaPotion.swift */,
 			);
 			path = "0706012110056-MirandaUtami-AFL1";
 			sourceTree = "<group>";
@@ -120,7 +141,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F9BFC6029D5B4B300DB33F3 /* User.swift in Sources */,
+				9F9BFC6C29D8668900DB33F3 /* ManaPotion.swift in Sources */,
 				9F976B5229AD9E83001F2C7F /* main.swift in Sources */,
+				9F9BFC6A29D8667E00DB33F3 /* HealthPotion.swift in Sources */,
+				9F9BFC6429D85FB100DB33F3 /* Golem.swift in Sources */,
+				9F9BFC6629D85FC000DB33F3 /* Troll.swift in Sources */,
+				9F9BFC6829D865B400DB33F3 /* Item.swift in Sources */,
+				9F9BFC6229D5B4C500DB33F3 /* Enemy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

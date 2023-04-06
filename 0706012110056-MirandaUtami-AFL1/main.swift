@@ -7,76 +7,92 @@
 
 import Foundation
 
-// inisialisasi variable dan attribute dari user dan monster
+/* Inisiasliasi object */
+var enemy = Enemy()
+var troll = Troll()
+var golem = Golem()
+var user = User()
+var healthPotion = HealthPotion()
+var manaPotion = ManaPotion()
+
+
+
+/* Inisialisasi variable dan attribute dari user dan monster */
 var index = 0
 var input: String? = nil
-var username: String?
-var health = 100
-var energi = 50
-var potion = 20
-var trollHealth = 1000
-var golemHealth = 1000
-var troll = 1
-var golem = 1
 
-// Creating an empty array //
+
+
+/* Creating an empty array */
 var enemyName: [String] = ["Troll","Golem"]
 let actions = ["Physical Attack", "Meteor", "Shield", "Use Potion", "Scan Enemy", "Flee"]
 
 
-//panggil function
+
+/* Panggil function */
 tampilanAwal()
 welcome()
 journey()
 
 
-// Tampiilan awal
+
+/* Tampiilan awal */
 func tampilanAwal() {
     while index == 0 {
         print("""
-            Welcome to the world of magic! 🧙‍♀️🧌
+            ========================================= WELCOME TO THE WORD OF MAGIC! 🧙‍♀️🧌 ==========================================
 
-            You have been chosen to embark on an epic journey as young wizard on the path to becoming a master of the arcane arts. Your adventures will take you throught forests 🌲, mountain 🏔️, and dungeons 🏰, where you will face challenges, make allies and fight enemies.
+            You have been chosen to embark on an epic journey as young wizard on the path to becoming a master of the arcane arts.
+            Your adventures will take you throught forests 🌲, mountain 🏔️, and dungeons 🏰,where you will face challenges, make
+            allies and fight enemies.
+            
+            ========================================================================================================================
 
             Press [return] to continue:
             """)
         
-//        Cek apakah inputan enter
         input = readLine()
+        
         if input == "" {
             break
         }else if input != ""{
-            print ("mohon maaf input salah")
+            print ("MOHON MAAF INPUT SALAH!!")
         }
     }
 }
 
 
-// Tampilan welcome
+
+/* Tampilan welcome */
 func welcome(){
     while index == 0 {
         print ("May I know your name, a young wizard?")
-        
-//        Cek apakah inputan huruf saja atau tidak
         if let input = readLine() {
             if input.rangeOfCharacter(from: CharacterSet.letters.inverted) == nil && input != "" {
-                username = input
+                user.username = input
                 break
             }
         }
         print("Masukkan huruf saja, hindari space !")
     }
-//    Merubah Optional menjadi fix
-    if let usernameFix = username{
+/* Merubah Optional menjadi fix */
+    if let usernameFix = user.username{
         print("")
-        print("Nice to meet you \(usernameFix)")
+        print("""
+              ===============================
+              
+              Nice to meet you \(usernameFix)
+              
+              ===============================
+              """)
     }else{
-        print ("mohon maaf input salah")
+        print ("MOHON MAAF INPUT SALAH!!")
     }
 }
 
 
-// tampilan journey
+
+/* tampilan journey */
 func journey(){
     while index == 0 {
         print ("""
@@ -84,6 +100,7 @@ func journey(){
                
                [C] Check your health and start
                [H] Heal your wounds with potion
+               [R] Regen mana with mana potion
                
                Or choose where you want to go
                
@@ -93,14 +110,16 @@ func journey(){
                
                Your choise?
                """)
+        
         input = readLine()?.uppercased()
         
-//        Switch untuk membuat sebuah kondisi inputan
         switch input {
             case "C":
                 playerStats()
             case "H":
-                healWound()
+                user.healWound()
+            case "R":
+                user.manaWound()
             case "F":
                 forestOfTroll()
             case "M":
@@ -108,26 +127,27 @@ func journey(){
             case "Q":
                 exit(1)
             default:
-                print("inputan salah !")
+                print("MOHON MAAF INPUT SALAH!!")
         }
     }
 }
 
 
-// Tampilan player stats
+
+/* Tampilan player stats */
 func playerStats(){
     while index == 0 {
-//        Merubah optional menjadi fix
-        if let usernameFix = username{
+/* Merubah optional menjadi fix */
+        if let usernameFix = user.username{
             print("")
             print("Player Name \(usernameFix)")
         }else{
-            print ("mohon maaf input salah")
+            print ("MOHON MAAF INPUT SALAH!!")
         }
        
         print ("""
-               HP = 100/\(health)
-               MP = 50/\(energi)
+               HP = 100/\(user.health)
+               MP = 50/\(user.energi)
                
                Magic :
                - physical Attack. No mana required. Deal 5pt of damage.
@@ -140,84 +160,28 @@ func playerStats(){
                
                press [return] to go back:
                """)
-        
-//        Cek apakah inputan enter
+
         input = readLine()
+        
         if input == "" {
             break
         }else if input != ""{
-            print ("mohon maaf input salah !!")
+            print ("MOHON MAAF INPUT SALAH!!")
         }
     }
 }
 
 
-// Tampilan heal wound
-func healWound(){
-    while index == 0 {
-        print ("""
-           
-           Your HP is \(health)
-           Your have \(potion) Potion
-           
-           Are you sure want to use 1 potion to heal wound? [Y/N]
-           
-           """)
-        
-        input = readLine()?.uppercased()
-        
-        if input == "Y" {
-//            Cek apakah potion masih ada
-            if potion > 0{
-                if health == 100{
-                    print("Health is Full")
-//                    Cek apakah nyawa kurang dari 100
-                } else if health < 100 {
-                    health += 20
-                    potion -= 1
-//                    Cek apakah nyawa lebih dari 100
-                    if health > 100 {
-                        health = 100
-                    }
-                }
-//                Cek apakah potion sudah habis
-            } else {
-                while index == 0 {
-//                    Kodisi jika potion habis
-                    print("""
-                          You don't have any potion left. Be careful of your next journey.
 
-                          press [return] to go back:
-                          """)
-
-//                    Cek apakah inputan enter
-                    input = readLine()
-                    if input == "" {
-                        break
-                    }else if input != ""{
-                        print ("mohon maaf input salah")
-                    }
-                }
-            }
-//            Kondisi jika klik N
-        } else if input == "N" {
-            break
-        } else {
-            print("Inputan salah")
-        }
-    }
-}
-
-
-// Tampilan forrest of troll
+/* Tampilan forrest of troll */
 func forestOfTroll(){
     while index == 0 {
         print("""
               As you enter the forest, you fell a sense of unease wash over you.
               Suddenly, you hear the sound of twigs snapping behind you. you quickly spin around, and find a troll emerging from the shadows.
               
-              😈 Nama   : \(enemyName[0]) x\(troll)
-              😈 Health : \(trollHealth)
+              😈 Nama   : \(enemyName[0]) x1
+              😈 Health : \(troll.troll.health)
               
               Choose your action :
               [1] physical Attack. No mana required. Deal 5pt of damage.
@@ -233,95 +197,35 @@ func forestOfTroll(){
         
         input = readLine()
         
-        
-//        Kondisi untuk cek inputan user
         if input == "1" {
-//            Kondisi physical attack
-            if health > 0 && trollHealth > 0 {
-                trollHealth -= 5
-                health -= 5
-                
-                if health < 0 {
-                    health = 0
-                    print("You lose")
-                    exit(1)
-                }
-                if trollHealth < 0 {
-                    trollHealth = 0
-                    print("You win")
-                    break
-                }
-            }
+            user.physicalTroll()
         }else if input == "2"{
-//            Kondisi meteor attack
-            if energi > 15{
-                if health > 0 && trollHealth > 0 {
-                    trollHealth -= 50
-                    health -= 5
-                    energi -= 15
-                    
-                    if health < 0 {
-                        health = 0
-                        print("You lose")
-                        exit(1)
-                    }
-                    if trollHealth < 0 {
-                        trollHealth = 0
-                        print("You win")
-                        break
-                    }
-                }
-            } else {
-                print("Your mana is \(energi), you can't use this attack")
-            }
+            user.meteorTroll()
         }else if input == "3"{
-//            Kondisi shield
-            if energi > 10 {
-                energi -= 10
-                print("You use shield, your health is \(health)")
-            } else {
-                print("Your mana is \(energi), you can't use shield")
-            }
+            user.shield()
         }else if input == "4"{
-//            Kondisi untuk memanggil fungsi heal wound
-            healWound()
+            user.healWound()
         }else if input == "5"{
-//            Kondisi untuk scan enemy vital
-            if health > 0 && trollHealth > 0 {
-                trollHealth -= 20
-                health -= 5
-                print("You attack monster vital with 20 damage")
-                if health < 0 {
-                    health = 0
-                    print("You lose")
-                    exit(1)
-                }
-                if trollHealth < 0 {
-                    trollHealth = 0
-                    print("You win")
-                    break
-                }
-            }
+            user.vitalTroll()
         }else if input == "6"{
-//            Kondisi untuk keluar dari pertandingan atau flee from batle
             keluarPertandingan()
             break
-//            Kondisi jika inputan salah / error handling
         }else{
-            print("Input not valid !!")
+            print("MOHON MAAF INPUT SALAH!!")
         }
     }
 }
 
 
-// Tampilan mountain of golem
+
+/* Tampilan mountain of golem */
 func mountainOfGolem(){
     while index == 0 {
         print("""
               As you make your way through the rugged montain terrain, you can fell the chill of the wind biting at your skin. Suddenly, you hear a sound that makes you freeze in your freeze in your tracks. that's when you see it - a massive ,snarling Golem emerging from the shadows.
               
-              😈 Nama   : \(enemyName[0]) x\(golem)
-              😈 Health : \(golemHealth)
+              😈 Nama   : \(enemyName[0]) x1
+              😈 Health : \(golem.golem.health)
               
               Choose your action :
               [1] physical Attack. No mana required. Deal 5pt of damage.
@@ -337,92 +241,28 @@ func mountainOfGolem(){
         
         input = readLine()
         
-//        Kondisi untuk cek inputan user
         if input == "1" {
-//            Kondisi physical attack
-            if health > 0 && golemHealth > 0 {
-                golemHealth -= 5
-                health -= 5
-                
-                if health < 0 {
-                    health = 0
-                    print("You lose")
-                    exit(1)
-                }
-                if golemHealth < 0 {
-                    golemHealth = 0
-                    print("You win")
-                    break
-                }
-            }
-            
+            user.physicalGolem()
         }else if input == "2"{
-//            Kondisi meteor attack
-            if energi > 15{
-                if health > 0 && golemHealth > 0 {
-                    golemHealth -= 50
-                    health -= 5
-                    energi -= 15
-                    
-                    if health < 0 {
-                        health = 0
-                        print("You lose")
-                        exit(1)
-                    }
-                    if golemHealth < 0 {
-                       golemHealth = 0
-                        print("You win")
-                        break
-                    }
-                }
-            } else {
-                print("Your mana is \(energi), you can't use this attack")
-            }
-            
+            user.meteorGolem()
         }else if input == "3"{
-//            Kondisi shield
-            if energi > 10 {
-                energi -= 10
-                print("You use shield, your health is \(health)")
-            } else {
-                print("Your mana is \(energi), you can't use shield")
-            }
-            
+            user.shield()
         }else if input == "4"{
-//            Kondisi untuk memanggil fungsi heal wound
-            healWound()
-            
+            user.healWound()
         }else if input == "5"{
-//            Kondisi untuk scan enemy vital
-            if health > 0 && golemHealth > 0 {
-                golemHealth -= 20
-                health -= 5
-                print("You attack monster vital with 20 damage")
-                if health < 0 {
-                    health = 0
-                    print("You lose")
-                    exit(1)
-                }
-                if golemHealth < 0 {
-                    golemHealth = 0
-                    print("You win")
-                    break
-                }
-            }
-            
+            user.vitalGolem()
         }else if input == "6"{
-//            Kondisi untuk keluar dari pertandingan atau flee from batle
             keluarPertandingan()
             break
         }else{
-//            Kondisi jika inputan salah / error handling
-            print("Mohon maaf Input salah !!")
+            print("MOHON MAAF INPUT SALAH!!!")
         }
     }
 }
 
 
-// Tampilan keluar dari pertandingan / flee from battle
+
+/* Tampilan keluar dari pertandingan / flee from battle */
 func keluarPertandingan(){
     while index == 0 {
         print("""
@@ -432,13 +272,15 @@ func keluarPertandingan(){
               press [return] to go back:
               """)
         
-//        Cek apakah inputan enter
         input = readLine()
+        
         if input == "" {
             break
         }else if input != ""{
-            print ("mohon maaf input salah")
+            print ("MOHON MAAF INPUT SALAH!!")
             continue
         }
     }
 }
+
+
